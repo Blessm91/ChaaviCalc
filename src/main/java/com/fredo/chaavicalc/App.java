@@ -12,7 +12,7 @@ public class App {
         Locale.setDefault(Locale.US);
 
         try (Scanner scanner = new Scanner(System.in)) {
-            double a = 0.0, b = 0.0;
+            float a = 0.0f, b = 0.0f;
             boolean running = true;
 
             while (running) {
@@ -23,45 +23,50 @@ public class App {
                 switch (cmd) {
                     case "a":
                         System.out.print("Enter value for A: ");
-                        a = readDouble(scanner);
+                        a = readFloat(scanner);
                         break;
 
                     case "b":
                         System.out.print("Enter value for B: ");
-                        b = readDouble(scanner);
+                        b = readFloat(scanner);
                         break;
 
                     case "+": // A = A + B
                         a = a + b;
-                        System.out.printf("A = %.3f (after A + B)%n", a);
+                        System.out.printf("A = %.3f (after A + B)%n", (double) a);
                         pause(scanner);
                         break;
 
                     case "-": // A = A - B
                         a = a - b;
-                        System.out.printf("A = %.3f (after A - B)%n", a);
+                        System.out.printf("A = %.3f (after A - B)%n", (double) a);
                         pause(scanner);
                         break;
 
                     case "*": // A = A * B
                         a = a * b;
-                        System.out.printf("A = %.3f (after A * B)%n", a);
+                        System.out.printf("A = %.3f (after A * B)%n", (double) a);
                         pause(scanner);
                         break;
 
                     case "/": // A = A / B with zero check
-                        if (b == 0.0) {
+                        if (Float.compare(b, 0.0f) == 0) {
                             System.out.println("Error: Division by zero.");
                         } else {
                             a = a / b;
-                            System.out.printf("A = %.3f (after A / B)%n", a);
+                            System.out.printf("A = %.3f (after A / B)%n", (double) a);
                         }
                         pause(scanner);
                         break;
 
+                    case "=": // Show current values
+                        System.out.printf("A = %.3f, B = %.3f%n", (double) a, (double) b);
+                        pause(scanner);
+                        break;
+
                     case "c": // Clear both
-                        a = 0.0;
-                        b = 0.0;
+                        a = 0.0f;
+                        b = 0.0f;
                         System.out.println("Cleared (A = 0.000, B = 0.000).");
                         pause(scanner);
                         break;
@@ -71,7 +76,7 @@ public class App {
                         break;
 
                     default:
-                        System.out.println("Invalid command.");
+                        System.out.println("Invalid command. Valid: a b + - * / = c q");
                         pause(scanner);
                 }
             }
@@ -79,11 +84,11 @@ public class App {
         }
     }
 
-    private static void printMenu(double a, double b) {
+    private static void printMenu(float a, float b) {
         System.out.println(LINE);
         System.out.println("Chaavi Calc");
         System.out.println(LINE);
-        System.out.printf("A = %.3f\tB = %.3f%n", a, b);
+        System.out.printf("A = %.3f\tB = %.3f%n", (double) a, (double) b);
         System.out.println(LINE);
         System.out.println("a   Enter a value for A");
         System.out.println("b   Enter a value for B");
@@ -91,16 +96,22 @@ public class App {
         System.out.println("-   Subtract (A = A - B)");
         System.out.println("*   Multiply (A = A * B)");
         System.out.println("/   Divide (A = A / B)");
+        System.out.println("=   Show current A and B");
         System.out.println("c   Clear (A = 0, B = 0)");
         System.out.println("q   Quit");
         System.out.println(LINE);
     }
 
-    private static double readDouble(Scanner scanner) {
+    private static float readFloat(Scanner scanner) {
         while (true) {
             String input = scanner.nextLine().trim();
             try {
-                return Double.parseDouble(input);
+                float v = Float.parseFloat(input);
+                if (!Float.isFinite(v)) {
+                    System.out.print("Invalid number (NaN/Infinity). Try again: ");
+                    continue;
+                }
+                return v;
             } catch (NumberFormatException e) {
                 System.out.print("Invalid number. Try again: ");
             }
