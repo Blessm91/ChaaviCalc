@@ -1,0 +1,8 @@
+{
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.jdt.ls.java.home": "C:\\Program Files\\Eclipse Adoptium\\jdk-24",
+  "java.configuration.runtimes": [
+    { "name": "JavaSE-24", "path": "C:\\Program Files\\Eclipse Adoptium\\jdk-24", "default": true }
+  ],
+  "maven.terminal.useJavaHome": true
+}
