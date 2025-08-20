@@ -18,66 +18,62 @@ public class App {
             while (running) {
                 printMenu(a, b);
                 System.out.print("Enter a command: ");
-                String cmd = scanner.nextLine().trim().toLowerCase();
+                String raw = scanner.nextLine().trim();
+                if (raw.isEmpty()) {
+                    System.out.println("Invalid command. Valid: a b + - * / = c q");
+                    pause(scanner);
+                    continue;
+                }
+                char cmd = Character.toLowerCase(raw.charAt(0));
 
-                switch (cmd) {
-                    case "a":
-                        System.out.print("Enter value for A: ");
-                        a = readFloat(scanner);
-                        break;
+                if (cmd == 'a') {
+                    System.out.print("Enter value for A: ");
+                    a = readFloat(scanner);
 
-                    case "b":
-                        System.out.print("Enter value for B: ");
-                        b = readFloat(scanner);
-                        break;
+                } else if (cmd == 'b') {
+                    System.out.print("Enter value for B: ");
+                    b = readFloat(scanner);
 
-                    case "+": // A = A + B
-                        a = a + b;
-                        System.out.printf("A = %.3f (after A + B)%n", (double) a);
-                        pause(scanner);
-                        break;
+                } else if (cmd == '+') {           // A = A + B
+                    a = a + b;
+                    System.out.printf("A = %.3f (after A + B)%n", (double) a);
+                    pause(scanner);
 
-                    case "-": // A = A - B
-                        a = a - b;
-                        System.out.printf("A = %.3f (after A - B)%n", (double) a);
-                        pause(scanner);
-                        break;
+                } else if (cmd == '-') {           // A = A - B
+                    a = a - b;
+                    System.out.printf("A = %.3f (after A - B)%n", (double) a);
+                    pause(scanner);
 
-                    case "*": // A = A * B
-                        a = a * b;
-                        System.out.printf("A = %.3f (after A * B)%n", (double) a);
-                        pause(scanner);
-                        break;
+                } else if (cmd == '*') {           // A = A * B
+                    a = a * b;
+                    System.out.printf("A = %.3f (after A * B)%n", (double) a);
+                    pause(scanner);
 
-                    case "/": // A = A / B with zero check
-                        if (Float.compare(b, 0.0f) == 0) {
-                            System.out.println("Error: Division by zero.");
-                        } else {
-                            a = a / b;
-                            System.out.printf("A = %.3f (after A / B)%n", (double) a);
-                        }
-                        pause(scanner);
-                        break;
+                } else if (cmd == '/') {           // A = A / B with zero check
+                    if (Float.compare(b, 0.0f) == 0) {
+                        System.out.println("Error: Division by zero.");
+                    } else {
+                        a = a / b;
+                        System.out.printf("A = %.3f (after A / B)%n", (double) a);
+                    }
+                    pause(scanner);
 
-                    case "=": // Show current values
-                        System.out.printf("A = %.3f, B = %.3f%n", (double) a, (double) b);
-                        pause(scanner);
-                        break;
+                } else if (cmd == '=') {           // Show current values
+                    System.out.printf("A = %.3f, B = %.3f%n", (double) a, (double) b);
+                    pause(scanner);
 
-                    case "c": // Clear both
-                        a = 0.0f;
-                        b = 0.0f;
-                        System.out.println("Cleared (A = 0.000, B = 0.000).");
-                        pause(scanner);
-                        break;
+                } else if (cmd == 'c') {           // Clear both
+                    a = 0.0f;
+                    b = 0.0f;
+                    System.out.println("Cleared (A = 0.000, B = 0.000).");
+                    pause(scanner);
 
-                    case "q": // Quit
-                        running = false;
-                        break;
+                } else if (cmd == 'q') {           // Quit
+                    running = false;
 
-                    default:
-                        System.out.println("Invalid command. Valid: a b + - * / = c q");
-                        pause(scanner);
+                } else {
+                    System.out.println("Invalid command. Valid: a b + - * / = c q");
+                    pause(scanner);
                 }
             }
             System.out.println("Goodbye!");
