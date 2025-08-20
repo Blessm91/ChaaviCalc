@@ -1,4 +1,4 @@
-package com.fredo.chaavicalc;
+package com.fredo.chavvicalc;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -82,7 +82,7 @@ public class App {
 
     private static void printMenu(float a, float b) {
         System.out.println(LINE);
-        System.out.println("Chaavi Calc");
+        System.out.println("Chavvi Calc");
         System.out.println(LINE);
         System.out.printf("A = %.3f\tB = %.3f%n", (double) a, (double) b);
         System.out.println(LINE);
@@ -119,3 +119,4 @@ public class App {
         scanner.nextLine();
     }
 }
+

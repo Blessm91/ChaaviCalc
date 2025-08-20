@@ -5,10 +5,11 @@
       "type": "java",
       "name": "Run Chaavi Calc",
       "request": "launch",
-      "mainClass": "com.fredo.chaavicalc.App",
+      "mainClass": "com.fredo.chavvicalc.App",
       "projectName": "chaavi-calc",
       "console": "integratedTerminal",
       "vmArgs": "-Dfile.encoding=UTF-8"
     }
   ]
 }
+
